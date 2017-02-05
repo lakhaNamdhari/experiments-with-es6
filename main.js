@@ -1,24 +1,28 @@
 
 (function(){
-  let obj = {
-    user: 'sam',
-    greetUser: function(){
-      alert(
-        `Welcome ${this.user},
-        We are glad to have you here. should you
-        need any further assistance`
-      );
-    },
-    init: function(){
-      document.addEventListener('click', () => this.greetUser());
-    }
-  };
-
-  //obj.init();
   let person = {
     name: 'lakha',
     age: 28
   };
+
+  // Html Templates, arrow functions and multiline strings
+  let testTAM = () => {
+    let obj = {
+      user: 'sam',
+      greetUser: function(){
+        console.log(
+          `Welcome ${this.user},
+          We are glad to have you here. should you
+          need any further assistance`
+        );
+      },
+      init: function(){
+        document.addEventListener('click', () => this.greetUser());
+      }
+    };
+    obj.init();
+  };
+  testTAM();
 
   // Destructuring assignments
   let testDestructuring = () => {
@@ -44,10 +48,54 @@
 
   // The new Promises
   let testPromises = () => {
-    var pObj = new Promise((accept, reject) => {
-      setTimeout(() => accept(), 1000);
+    let resolved = new Promise((accept, reject) => {
+      setTimeout(() => {
+        try{
+          accept()
+        }catch(e){
+          console.error('Promise rejected!');
+        }
+      }, 1000);
     });
-    pObj.then( () => alert('Promise resolved!'));
+    resolved.then(() => console.log('Promise resolved!'));
   };
   testPromises();
+
+  // Block level scope and const
+  let testConst = () => {
+    const fruit = 'apple';
+    try{
+      fruit = 'banana';
+    }catch(e){
+      console.error(`${fruit} is immutable`);
+    }
+  };
+  testConst();
+
+  // Testing Classes and Inheritance
+  class Fruit{
+    constructor(name = 'unknown'){
+      this.name = name;
+      this.eatable = true;
+    }
+
+    isEatable(){
+      return this.eatable;
+    }
+  }
+
+  class Jam extends Fruit{
+    constructor(name, weight){
+      super(name);
+      this.weight = weight;
+    }
+
+    info(){
+      return `This is ${this.name} jam weighing ${this.weight} gms`;
+    }
+  }
+
+  let ja = new Jam('Apple', 100);
+  console.log(ja.info());
+  console.log(ja.isEatable());
 })();
