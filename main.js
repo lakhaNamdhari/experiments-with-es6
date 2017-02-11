@@ -1,5 +1,6 @@
-
+import {addMark} from './testmodule.js';
 (function(){
+
   let person = {
     name: 'lakha',
     age: 28
@@ -65,7 +66,7 @@
   let testConst = () => {
     const fruit = 'apple';
     try{
-      fruit = 'banana';
+      //fruit = 'banana'; //error prone
     }catch(e){
       console.error(`${fruit} is immutable`);
     }
@@ -98,4 +99,7 @@
   let ja = new Jam('Apple', 100);
   console.log(ja.info());
   console.log(ja.isEatable());
+
+  // Import / Export usage
+  addMark();
 })();
